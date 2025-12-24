@@ -73,13 +73,13 @@ if [[ "$REMOVE" == true ]]; then
     fi
 else
     # Install plugin
-    
+
     # Check source exists
     if [[ ! -d "$SOURCE_DIR" ]]; then
         echo "Error: Source directory not found: $SOURCE_DIR"
         exit 1
     fi
-    
+
     # Create plugin directory if it doesn't exist
     mkdir -p "$PLUGIN_DIR"
 
