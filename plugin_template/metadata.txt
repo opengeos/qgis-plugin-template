@@ -1,0 +1,40 @@
+[general]
+name=Plugin Template
+qgisMinimumVersion=3.28
+description=A template for creating QGIS plugins with dockable panels, update checker, and about dialog.
+version=0.1.0
+author=Your Name
+email=your.email@example.com
+
+about=This is a template plugin that demonstrates the structure and best practices for QGIS plugin development.
+
+    Features:
+    - Dockable panels that can be positioned anywhere in the QGIS interface
+    - Plugin update checker that fetches the latest version from GitHub
+    - About dialog with version information
+    - Menu and toolbar integration
+    - Clean, modular code structure following QGIS plugin guidelines
+
+    Use this template as a starting point for your own QGIS plugins.
+
+tracker=https://github.com/opengeos/qgis-plugin-template/issues
+repository=https://github.com/opengeos/qgis-plugin-template
+
+hasProcessingProvider=no
+
+tags=template, plugin, development, dockable, panels
+
+homepage=https://github.com/opengeos/qgis-plugin-template
+category=Plugins
+icon=icons/icon.svg
+
+experimental=False
+deprecated=False
+
+changelog=
+    0.1.0 - Initial release
+        - Basic plugin structure with dockable panels
+        - Update checker functionality
+        - About dialog
+        - Menu and toolbar integration
+
