@@ -211,11 +211,16 @@ chmod +x package_plugin.sh
 
 ### Option A: QGIS Plugin Manager (Recommended)
 
-Once published to the official repository:
 1. Open QGIS
-2. Go to `Plugins` → `Manage and Install Plugins...`
-3. Search for your plugin name
-4. Click `Install Plugin`
+2. Go to **Plugins** → **Manage and Install Plugins...**
+3. Go to the **Settings** tab
+4. Click **Add...** under "Plugin Repositories"
+5. Give a name for the repository, e.g., "OpenGeos"
+6. Enter the URL of the repository: https://qgis.gishub.org/plugins.xml
+7. Click **OK**
+8. Go to the **All** tab
+9. Search for your plugin name
+10. Select your plugin from the list and click **Install Plugin**
 
 ### Option B: Install Script
 
