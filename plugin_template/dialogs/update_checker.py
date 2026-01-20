@@ -28,7 +28,6 @@ from qgis.PyQt.QtWidgets import (
 )
 from qgis.PyQt.QtGui import QFont
 
-
 # GitHub URLs for the plugin
 # TODO: Update these values for your plugin
 GITHUB_REPO = "opengeos/qgis-plugin-template"
