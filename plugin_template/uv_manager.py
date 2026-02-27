@@ -91,8 +91,7 @@ def get_uv_download_url() -> str:
     platform_str, ext = _get_uv_platform_info()
     filename = f"uv-{platform_str}{ext}"
     return (
-        f"https://github.com/astral-sh/uv/releases/download/"
-        f"{UV_VERSION}/{filename}"
+        f"https://github.com/astral-sh/uv/releases/download/" f"{UV_VERSION}/{filename}"
     )
 
 
@@ -191,8 +190,7 @@ def download_uv(
             error_msg = request.errorMessage()
             if "404" in error_msg or "Not Found" in error_msg:
                 error_msg = (
-                    f"uv {UV_VERSION} not available for this platform. "
-                    f"URL: {url}"
+                    f"uv {UV_VERSION} not available for this platform. " f"URL: {url}"
                 )
             else:
                 error_msg = f"Download failed: {error_msg}"
