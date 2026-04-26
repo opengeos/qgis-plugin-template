@@ -41,7 +41,9 @@ class SampleDockWidget(QDockWidget):
         super().__init__("Sample Panel", parent)
         self.iface = iface
 
-        self.setAllowedAreas(Qt.LeftDockWidgetArea | Qt.RightDockWidgetArea)
+        self.setAllowedAreas(
+            Qt.DockWidgetArea.LeftDockWidgetArea | Qt.DockWidgetArea.RightDockWidgetArea
+        )
 
         self._setup_ui()
 
@@ -61,7 +63,7 @@ class SampleDockWidget(QDockWidget):
         header_font.setPointSize(12)
         header_font.setBold(True)
         header_label.setFont(header_font)
-        header_label.setAlignment(Qt.AlignCenter)
+        header_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(header_label)
 
         # Description

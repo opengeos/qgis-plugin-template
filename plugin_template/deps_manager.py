@@ -6,13 +6,19 @@ to avoid polluting the QGIS built-in Python environment.
 
 The venv is created at ~/.qgis_plugin_template/venv_pyX.Y and its
 site-packages directory is added to sys.path at runtime.
+
+All ``subprocess`` calls in this module use list-form argv built from
+internal constants (the resolved Python interpreter, the resolved ``uv``
+binary, fixed flags) and never accept user-supplied input or run with
+``shell=True``. The ``# nosec`` annotations on the import and call sites
+document this explicitly for the plugins.qgis.org Bandit scan.
 """
 
 import importlib
 import os
 import platform
 import shutil
-import subprocess
+import subprocess  # nosec B404
 import sys
 import time
 from typing import Callable, Dict, List, Optional, Tuple
@@ -345,7 +351,7 @@ def _verify_pip_and_return(python_path: str) -> str:
     kwargs = _get_subprocess_kwargs()
 
     # Try ensurepip (may already be present from EnvBuilder)
-    subprocess.run(
+    subprocess.run(  # nosec B603
         [python_path, "-m", "ensurepip", "--upgrade"],
         capture_output=True,
         text=True,
@@ -355,7 +361,7 @@ def _verify_pip_and_return(python_path: str) -> str:
     )
 
     # Verify pip works
-    result = subprocess.run(
+    result = subprocess.run(  # nosec B603
         [python_path, "-m", "pip", "--version"],
         capture_output=True,
         text=True,
@@ -413,7 +419,7 @@ def create_venv(venv_dir: str) -> str:
         uv_path = get_uv_path()
         python_exe = _find_python_executable()
         cmd = [uv_path, "venv", "--python", python_exe, venv_dir]
-        result = subprocess.run(
+        result = subprocess.run(  # nosec B603
             cmd,
             capture_output=True,
             text=True,
@@ -431,7 +437,7 @@ def create_venv(venv_dir: str) -> str:
     subprocess_error = ""
 
     cmd = [python_exe, "-m", "venv", venv_dir]
-    result = subprocess.run(
+    result = subprocess.run(  # nosec B603
         cmd,
         capture_output=True,
         text=True,
@@ -456,8 +462,9 @@ def create_venv(venv_dir: str) -> str:
     _cleanup_partial_venv(venv_dir)
 
     # Strategy 3: Create venv without pip, then copy Python executable if needed
+    strategy3_error = ""
     try:
-        result2 = subprocess.run(
+        result2 = subprocess.run(  # nosec B603
             [python_exe, "-m", "venv", "--without-pip", venv_dir],
             capture_output=True,
             text=True,
@@ -470,8 +477,10 @@ def create_venv(venv_dir: str) -> str:
                 _try_copy_python_executable(venv_dir)
             if os.path.isfile(python_path):
                 return _verify_pip_and_return(python_path)
-    except Exception:
-        pass
+        else:
+            strategy3_error = result2.stderr or result2.stdout or ""
+    except Exception as exc:
+        strategy3_error = f"{type(exc).__name__}: {exc}"
 
     # All strategies failed
     details = [
@@ -483,6 +492,8 @@ def create_venv(venv_dir: str) -> str:
     ]
     if subprocess_error:
         details.append(f"Subprocess error: {subprocess_error}")
+    if strategy3_error:
+        details.append(f"Strategy 3 error: {strategy3_error}")
 
     raise RuntimeError(
         "Failed to create virtual environment after trying multiple strategies.\n\n"
@@ -544,7 +555,7 @@ def install_packages(
         installer = "uv" if use_uv else "pip"
         progress_callback(20, f"Installing ({installer}): {', '.join(packages)}...")
 
-    result = subprocess.run(
+    result = subprocess.run(  # nosec B603
         cmd,
         capture_output=True,
         text=True,
@@ -610,7 +621,7 @@ class DepsInstallWorker(QThread):
                 env = _get_clean_env()
                 kwargs = _get_subprocess_kwargs()
 
-                result = subprocess.run(
+                result = subprocess.run(  # nosec B603
                     [python_path, "-m", "pip", "--version"],
                     capture_output=True,
                     text=True,

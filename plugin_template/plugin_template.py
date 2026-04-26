@@ -189,7 +189,9 @@ class PluginTemplate:
                 self._sample_dock.visibilityChanged.connect(
                     self._on_sample_visibility_changed
                 )
-                self.iface.addDockWidget(Qt.RightDockWidgetArea, self._sample_dock)
+                self.iface.addDockWidget(
+                    Qt.DockWidgetArea.RightDockWidgetArea, self._sample_dock
+                )
                 self._sample_dock.show()
                 self._sample_dock.raise_()
                 return
@@ -227,7 +229,9 @@ class PluginTemplate:
                 self._settings_dock.visibilityChanged.connect(
                     self._on_settings_visibility_changed
                 )
-                self.iface.addDockWidget(Qt.RightDockWidgetArea, self._settings_dock)
+                self.iface.addDockWidget(
+                    Qt.DockWidgetArea.RightDockWidgetArea, self._settings_dock
+                )
                 self._settings_dock.show()
                 self._settings_dock.raise_()
                 return
@@ -312,7 +316,7 @@ class PluginTemplate:
 
         try:
             dialog = UpdateCheckerDialog(self.plugin_dir, self.iface.mainWindow())
-            dialog.exec_()
+            dialog.exec()
         except Exception as e:
             QMessageBox.critical(
                 self.iface.mainWindow(),
