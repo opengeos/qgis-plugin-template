@@ -2,6 +2,8 @@
 
 A comprehensive template for creating QGIS plugins with dockable panels, update checker, and all the essential features needed for a professional plugin.
 
+Compatible with both QGIS 3.28+ (Qt5) and QGIS 4.0 (Qt6) from a single codebase, and listed on the [QGIS 4 Ready](https://plugins.qgis.org/plugins/new_qgis_ready/) plugin index.
+
 ## Features
 
 - **Dockable Panels**: Sample panels that can be docked anywhere in the QGIS interface
@@ -9,6 +11,9 @@ A comprehensive template for creating QGIS plugins with dockable panels, update 
 - **About Dialog**: Display version information and links
 - **Settings Panel**: Configurable plugin options with persistent storage
 - **Menu & Toolbar Integration**: Full integration with QGIS menu system and custom toolbar
+- **Qt5/Qt6 Dual Compatibility**: Works on QGIS 3.28+ and QGIS 4.0 without version-conditional branching
+- **PyQt6 Import-Smoke Tests**: Catches Qt6 enum regressions before upload
+- **Bandit Security Scan**: Mirrors the scan that plugins.qgis.org runs on upload
 - **Clean Code Structure**: Well-organized, documented, and following QGIS plugin best practices
 - **Packaging Scripts**: Ready-to-use scripts for creating zip files for the official QGIS plugin repository
 
@@ -40,7 +45,7 @@ qgis-plugin-template/
 
 ## Requirements
 
-- QGIS 3.28 or later
+- QGIS 3.28 through 4.x (one branch, runs on both Qt5 and Qt6)
 - Python 3.10+
 
 ## Quick Start
