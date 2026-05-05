@@ -3,7 +3,7 @@ name=Plugin Template
 qgisMinimumVersion=3.28
 qgisMaximumVersion=4.99
 description=A template for creating QGIS plugins with dockable panels, update checker, and about dialog.
-version=0.3.0
+version=0.3.1
 author=Your Name
 email=your.email@example.com
 
@@ -38,6 +38,8 @@ experimental=False
 deprecated=False
 
 changelog=
+    0.3.1 - Dependency installer fix
+        - Fixed Python detection for macOS QGIS app bundles
     0.3.0 - QGIS 4.0 / Qt6 compatibility
         - Compatible with QGIS 4.0 (Qt6) while keeping QGIS 3.28+ support
         - Qualified Qt and QGIS enums for PyQt6
@@ -52,4 +54,3 @@ changelog=
         - Update checker functionality
         - About dialog
         - Menu and toolbar integration
-
