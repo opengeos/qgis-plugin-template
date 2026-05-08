@@ -3,7 +3,7 @@ name=Plugin Template
 qgisMinimumVersion=3.28
 qgisMaximumVersion=4.99
 description=A template for creating QGIS plugins with dockable panels, update checker, and about dialog.
-version=0.3.1
+version=0.3.2
 author=Your Name
 email=your.email@example.com
 
